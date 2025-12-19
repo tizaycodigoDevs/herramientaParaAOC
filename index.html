@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herramienta para AOC - Recent Stories</title>
+
+    <style>
+        :root {
+            --verde-principal: #26726b;
+            /* verde petróleo */
+            --verde-sec: #4a8a82;
+            /* secundario suave */
+            --acento: #8cad6e;
+            /* acento terracota verdoso */
+            --fondo: #f9faf8;
+            /* fondo general claro */
+            --caja: #e7efed;
+            /* cajas info */
+            --borde: #d9ddd9;
+            /* bordes */
+            --texto: #2b2b2b;
+            /* texto principal */
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: var(--fondo);
+            color: var(--texto);
+        }
+
+        .app {
+            max-width: 1100px;
+            margin: auto;
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .06);
+        }
+
+        /* HEADER CON LOGO */
+        header {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 20px;
+        }
+
+        header img {
+            width: 180px;
+            max-height: 60px;
+            object-fit: contain;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8em;
+            color: var(--verde-principal);
+            letter-spacing: 0.02em;
+        }
+
+        p.lead {
+            max-width: 780px;
+            line-height: 1.6;
+        }
+
+        .info {
+            background: var(--caja);
+            border-left: 5px solid var(--verde-principal);
+            padding: 18px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+
+        .info ol {
+            margin: 10px 0 0 18px;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0;
+            justify-content: center;
+        }
+
+
+        button {
+            border: none;
+            padding: 12px 18px;
+            font-size: 15px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button.primary {
+            background: var(--verde-principal);
+            color: #fff;
+        }
+
+        button.secondary {
+            background: var(--verde-sec);
+            color: #fff;
+        }
+
+        button.success {
+            background: var(--acento);
+            color: #fff;
+        }
+
+        button:hover {
+            filter: brightness(0.95);
+        }
+
+        textarea {
+            width: 100%;
+            height: 420px;
+            padding: 14px;
+            font-size: 13px;
+            font-family: Consolas, monospace;
+            border: 1px solid var(--borde);
+            border-radius: 6px;
+            resize: vertical;
+            white-space: pre;
+            background: #fff;
+        }
+
+        legend {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #666;
+
+        }
+
+        .contact-card {
+            margin-top: 40px;
+            padding: 20px;
+            background: var(--caja);
+            border-left: 4px solid var(--verde-principal);
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+
+        .contact-card a {
+            color: var(--principal);
+            text-decoration: none;
+        }
+
+        .contact-card a:hover {
+            text-decoration: underline;
+        }
+
+        @media(max-width:700px) {
+            .app {
+                max-width: 960px;
+                /* un poco más angosto */
+                margin: 40px auto;
+                /* más aire arriba/abajo */
+                background: #fff;
+                padding: 32px;
+                border-radius: 14px;
+                /* más suave */
+                box-shadow: 0 12px 40px rgba(0, 0, 0, .08);
+            }
+
+
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            textarea {
+                height: 320px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- HEADER CON LOGO AOC -->
+        <header>
+            <img src="https://images.squarespace-cdn.com/content/v1/57599dfb59827e6b8fd924ec/54c97b0f-ad01-4223-af87-a5736dbde3be/AOC+Logo_horizontal.png?format=500w"
+                alt="Logo AOC">
+            <h1>Generador de Recent Stories</h1>
+        </header>
+
+        <p class="lead">
+            Esta herramienta genera <strong>automáticamente el HTML</strong>
+            de <em>Recent Stories</em> a partir de los contenidos del blog.
+        </p>
+
+        <div class="info">
+
+            <strong>Pasos rápidos</strong>
+            <ol>
+                <li>Presioná <b>Generar HTML</b>.</li>
+                <li>(Opcional) Previsualizá el resultado.</li>
+                <li>Copiá o descargá el código generado.</li>
+                <li>Pegalo en la sección <b>Recent Post</b> del blog.</li>
+            </ol>
+
+            <details style="margin-top:12px;">
+                <summary style="cursor:pointer; font-weight:600;">
+                    ¿Tenés dudas? Ver instrucciones detalladas
+                </summary>
+
+                <div style="margin-top:10px; line-height:1.6;">
+                    <ol>
+                        <li>Ingresá a este sitio.</li>
+                        <li>Presioná <b>Generar HTML</b> y esperá unos segundos.</li>
+                        <li>El código HTML se generará en el campo inferior.</li>
+                        <li>
+                            Si querés, presioná <b>Previsualizar</b> para ver cómo se verá publicado.
+                            Esta acción no modifica el blog.
+                        </li>
+                        <li>
+                            Presioná <b>Copiar</b> o <b>Descargar .txt</b>.
+                            (Descargar sirve como respaldo.El nombre de archivo corresponde a la fecha actual)
+                        </li>
+                        <li>Ingresá al administrador del blog.</li>
+                        <li>Entrá en <b>Pages → Recent Post</b>.</li>
+                        <li>Ubicate arriba del bloque de contenido.</li>
+                        <li>Presioná <b>Edit</b> → <b>Code</b>.</li>
+                        <li>Seleccioná <b>todo</b> el contenido del bloque.</li>
+                        <li>
+                            Pegá el código generado desde esta herramienta,
+                            reemplazando completamente el contenido anterior.
+                        </li>
+                        <li>Guardá los cambios.</li>
+                    </ol>
+
+                    <p style="margin-top:8px;">
+                        ⚠️ Importante: siempre reemplazá todo el contenido del bloque.
+                        No pegues el código encima de otro texto.
+                    </p>
+                </div>
+            </details>
+
+        </div>
+
+
+        <div class="actions">
+            <button class="primary" id="btnGenerar">Generar HTML</button>
+            <button class="secondary" id="btnPreview">Previsualizar</button>
+            <button class="secondary" id="btnCopiar">Copiar</button>
+            <button class="success" id="btnDescargar">Descargar .txt</button>
+        </div>
+
+
+        <textarea id="resultado" placeholder="Acá se va a generar el HTML listo para pegar en Recent Post…"></textarea>
+
+        <legend>El archivo descargado se guarda con el nombre de la fecha actual. Lo podés encontrar en tu carpeta de "descargas o download"</legend>
+        <div class="contact-card">
+            <strong>Soporte y consultas</strong>
+            <p>
+                Si tenés dudas o algo no funciona como esperabas,
+                podés comunicarte sin problema:
+            </p>
+
+            <p>
+                📱 <b>WhatsApp:</b>
+                <a href="https://wa.me/5491139327614" target="_blank">
+                    +54 9 11 39327614
+                </a><br>
+                ✉️ <b>Email:</b>
+                <a href="tizaycodigo@gmail.com">
+                    tizaycodigo@gmail.com
+                </a>
+            </p>
+        </div>
+
+        <footer>
+            &copy; Tiza & Código - 2025
+        </footer>
+
+    </div>
+
+    <script>
+        /* URL CLOUDFLARE WORKER */
+        const JSON_URL = 'https://aoc-json-proxy.crasnosky.workers.dev';
+
+        document.getElementById('btnGenerar').onclick = generarHTML;
+        document.getElementById('btnCopiar').onclick = copiarHTML;
+        document.getElementById('btnDescargar').onclick = descargarTXT;
+        document.getElementById('btnPreview').onclick = previsualizarHTML;
+
+        async function generarHTML() {
+            const res = await fetch(JSON_URL);
+            const data = await res.json();
+            const posts = data.items.slice(0, 5);
+            const destacada = posts[0];
+            const grid = posts.slice(1);
+
+            const html = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recent Stories</title>
+
+<style>
+.news-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.news-item {
+  text-decoration: none;
+  color: #343434;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+}
+.news-item p {
+  min-height: 48px;
+  max-height: 48px;
+  overflow: hidden;
+  font-size: 17px;
+  font-weight: bold;
+  line-height: 1.4;
+  margin-top: 10px;
+}
+.news-item img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+}
+p {
+  font-size: 17px;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+}
+p.intro {
+  font-weight: normal;
+}
+.main-news img {
+  width: 100%;
+  max-width: 975px;
+  max-height: 470px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+}
+</style>
+</head>
+
+<body>
+
+<h1><strong>Recent Stories That Stir Compassion</strong></h1>
+<p class="intro">
+Why do we go numb to others’ suffering in a world full of crisis?
+Personal stories, music, and art can help us feel—and care—again.
+</p>
+
+<p class="main-title"><strong>${esc(destacada.title)}</strong></p>
+
+<a href="${destacada.fullUrl}" class="main-news">
+  <img src="${destacada.assetUrl || ''}" alt="${esc(destacada.title)}">
+</a>
+
+<br><br>
+
+<div class="news-grid">
+${grid.map(p => `
+  <a href="${p.fullUrl}" class="news-item">
+    <p>${esc(p.title)}</p>
+    <img src="${p.assetUrl || ''}" alt="${esc(p.title)}">
+  </a>
+`).join('')}
+</div>
+
+</body>
+</html>
+`.trim();
+
+            document.getElementById('resultado').value = html;
+        }
+
+        function copiarHTML() {
+            const t = document.getElementById('resultado');
+            const btn = document.getElementById('btnCopiar');
+
+            if (!t.value) return;
+
+            t.select();
+            document.execCommand('copy');
+
+            const textoOriginal = btn.textContent;
+            btn.textContent = 'Copiado ✓';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.textContent = textoOriginal;
+                btn.disabled = false;
+            }, 2000);
+        }
+
+
+        function previsualizarHTML() {
+            const contenido = document.getElementById('resultado').value;
+            if (!contenido) {
+                alert('Primero generá el HTML');
+                return;
+            }
+            const ventana = window.open('', '_blank');
+            ventana.document.open();
+            ventana.document.write(contenido);
+            ventana.document.close();
+        }
+
+        function descargarTXT() {
+            const contenido = document.getElementById('resultado').value;
+            if (!contenido) return;
+            const d = new Date();
+            const nombre = `actualizacion${String(d.getDate()).padStart(2, '0')}${String(d.getMonth() + 1).padStart(2, '0')}${d.getFullYear()}.txt`;
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(new Blob([contenido], { type: 'text/plain' }));
+            a.download = nombre;
+            a.click();
+        }
+
+        function esc(s) {
+            return String(s).replace(/[&<>"]/g, c => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'
+            }[c]));
+        }
+    </script>
+
+</body>
+
+</html>
