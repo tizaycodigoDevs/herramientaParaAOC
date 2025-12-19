@@ -164,6 +164,29 @@
             text-decoration: underline;
         }
 
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .icon {
+            width: 22px;
+            height: 22px;
+            flex-shrink: 0;
+            fill: var(--verde-principal);
+        }
+
+        .icon.whatsapp {
+            fill: #2f8f7a;
+        }
+
+        .icon.gmail {
+            fill: #6b6b6b;
+        }
+
+
         @media(max-width:700px) {
             .app {
                 max-width: 960px;
@@ -199,7 +222,7 @@
         <header>
             <img src="https://images.squarespace-cdn.com/content/v1/57599dfb59827e6b8fd924ec/54c97b0f-ad01-4223-af87-a5736dbde3be/AOC+Logo_horizontal.png?format=500w"
                 alt="Logo AOC">
-            <h1>Generador de Recent Stories</h1>
+            <h1>Herramienta para AOC - Recent Stories</h1>
         </header>
 
         <p class="lead">
@@ -267,7 +290,8 @@
 
         <textarea id="resultado" placeholder="Acá se va a generar el HTML listo para pegar en Recent Post…"></textarea>
 
-        <legend>El archivo descargado se guarda con el nombre de la fecha actual. Lo podés encontrar en tu carpeta de "descargas o download"</legend>
+        <legend>El archivo descargado se guarda con el nombre de la fecha actual. Lo podés encontrar en tu carpeta de
+            "descargas o download"</legend>
         <div class="contact-card">
             <strong>Soporte y consultas</strong>
             <p>
@@ -275,16 +299,36 @@
                 podés comunicarte sin problema:
             </p>
 
-            <p>
-                📱 <b>WhatsApp:</b>
-                <a href="https://wa.me/5491139327614" target="_blank">
-                    +54 9 11 39327614
-                </a><br>
-                ✉️ <b>Email:</b>
-                <a href="tizaycodigo@gmail.com">
-                    tizaycodigo@gmail.com
-                </a>
-            </p>
+            <div class="contact-item">
+                <!-- WhatsApp icon -->
+                <svg class="icon whatsapp" viewBox="0 0 32 32" aria-hidden="true">
+                    <path
+                        d="M16 0C7.164 0 0 6.87 0 15.352c0 2.71.73 5.35 2.12 7.67L0 32l9.23-2.42A16.42 16.42 0 0016 30.7c8.84 0 16-6.87 16-15.35C32 6.87 24.84 0 16 0zm0 28.3c-2.55 0-5.03-.67-7.2-1.94l-.52-.3-5.47 1.44 1.46-5.32-.34-.55A13.8 13.8 0 012.3 15.35C2.3 8.3 8.3 2.6 16 2.6s13.7 5.7 13.7 12.75S23.7 28.3 16 28.3zm7.55-9.04c-.41-.2-2.44-1.2-2.82-1.34-.38-.14-.66-.2-.94.2-.27.4-1.08 1.34-1.33 1.62-.24.27-.48.3-.89.1-.41-.2-1.73-.63-3.3-2.01-1.22-1.08-2.05-2.42-2.29-2.82-.24-.4-.03-.62.18-.82.19-.19.41-.48.62-.72.2-.24.27-.41.41-.68.14-.27.07-.5-.03-.72-.1-.2-.94-2.2-1.29-3.01-.34-.8-.69-.69-.94-.7h-.8c-.27 0-.72.1-1.1.5-.38.41-1.44 1.41-1.44 3.44s1.48 4 1.68 4.28c.2.27 2.92 4.43 7.07 6.21.99.43 1.77.69 2.37.88 1 .31 1.91.27 2.63.16.8-.12 2.44-1 2.79-1.98.34-.98.34-1.82.24-1.98-.1-.17-.38-.27-.79-.48z" />
+                </svg>
+
+
+                <div>
+                    <b>WhatsApp</b><br>
+                    <a href="https://wa.me/5491139327614" target="_blank">
+                        +54 9 11 3932-7614
+                    </a>
+                </div>
+            </div>
+
+            <div class="contact-item">
+                <!-- Gmail icon -->
+                <svg class="icon gmail" viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                        d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4.99l-8 5-8-5V6l8 5 8-5v2.99z" />
+                </svg>
+
+                <div>
+                    <b>Email</b><br>
+                    <a href="mailto:tizaycodigo@gmail.com">
+                        tizaycodigo@gmail.com
+                    </a>
+                </div>
+            </div>
         </div>
 
         <footer>
