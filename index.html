@@ -349,7 +349,7 @@
         async function generarHTML() {
             const res = await fetch(JSON_URL);
             const data = await res.json();
-            const posts = data.items.slice(0, 5);
+            const posts = data.items.slice(0, 9);
             const destacada = posts[0];
             const grid = posts.slice(1);
 
@@ -493,3 +493,4 @@ ${grid.map(p => `
 </body>
 
 </html>
+
